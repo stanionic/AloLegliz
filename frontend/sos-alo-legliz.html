@@ -310,6 +310,25 @@
   .share-btn:hover{ border-color:var(--gold); transform:translateY(-3px); }
 
   /* ---------- FOOTER ---------- */
+  .contact-banner{
+    display:flex; align-items:center; justify-content:space-between; gap:24px;
+    margin:28px 20px 0; padding:28px 36px;
+    border:1px solid rgba(201,162,39,0.3); border-left:6px solid #d5a928;
+    border-radius:24px; background:#fffdfa; color:#132a54;
+  }
+  .contact-banner p{ font-size:clamp(1rem, 2vw, 1.2rem); line-height:1.5; }
+  .contact-link{
+    display:inline-flex; align-items:center; justify-content:center; gap:12px;
+    flex-shrink:0; padding:17px 26px; border-radius:999px;
+    background:#15366f; color:#fff; font-weight:800; text-align:center;
+  }
+  .contact-link span{ color:#a5e3c4; font-weight:700; }
+  .contact-link:hover{ background:#1b4489; }
+  .contact-link:focus-visible{ outline:3px solid #d5a928; outline-offset:3px; }
+  @media(max-width:700px){
+    .contact-banner{ flex-direction:column; align-items:stretch; gap:18px; margin:20px 12px 0; padding:24px 20px; }
+    .contact-link{ flex-wrap:wrap; padding:15px 20px; }
+  }
   footer{ background:#071426; padding:60px 0 40px; text-align:center; }
   footer .fnote{ font-size:0.78rem; color:rgba(247,244,236,0.45); margin-top:20px; line-height:1.7; }
 
@@ -593,6 +612,12 @@
 </section>
 
 <!-- ================= SHARE / FOOTER ================= -->
+<aside class="contact-banner" aria-label="Contacter le concepteur">
+  <p>Une question ou un projet ? Échangez directement avec le concepteur.</p>
+  <a class="contact-link" href="https://wa.me/50948592888" target="_blank" rel="noopener noreferrer">
+    Contacter le concepteur <span>WhatsApp ↗</span>
+  </a>
+</aside>
 <footer>
   <div class="container">
     <div class="eyebrow" style="margin-bottom:18px;">Partager l'événement</div>
