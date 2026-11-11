@@ -14,6 +14,11 @@ def home():
     return send_from_directory(FRONTEND_DIR, "sos-alo-legliz.html")
 
 
+@app.get("/footer.PNG")
+def footer_image():
+    return send_from_directory(FRONTEND_DIR, "footer.PNG")
+
+
 if __name__ == "__main__":
     app.run(
         host=os.environ.get("HOST", "0.0.0.0"),
