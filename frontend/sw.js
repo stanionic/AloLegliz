@@ -2,8 +2,7 @@ const CACHE_NAME = 'alolegliz-v1';
 const ASSETS = [
   '/',
   '/manifest.json',
-  '/icons/icon-192.svg',
-  '/icons/icon-512.svg',
+  '/images/logo.png',
   'https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap',
   'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=2000&q=85'
 ];

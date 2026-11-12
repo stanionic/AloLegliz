@@ -29,6 +29,11 @@ def icons(filename):
     return send_from_directory(FRONTEND_DIR / "icons", filename)
 
 
+@app.get("/images/<path:filename>")
+def images(filename):
+    return send_from_directory(FRONTEND_DIR / "images", filename)
+
+
 if __name__ == "__main__":
     app.run(
         host=os.environ.get("HOST", "0.0.0.0"),
