@@ -14,6 +14,21 @@ def home():
     return send_from_directory(FRONTEND_DIR, "sos-alo-legliz.html")
 
 
+@app.get("/manifest.json")
+def manifest():
+    return send_from_directory(FRONTEND_DIR, "manifest.json", mimetype="application/manifest+json")
+
+
+@app.get("/sw.js")
+def service_worker():
+    return send_from_directory(FRONTEND_DIR, "sw.js", mimetype="application/javascript")
+
+
+@app.get("/icons/<path:filename>")
+def icons(filename):
+    return send_from_directory(FRONTEND_DIR / "icons", filename)
+
+
 if __name__ == "__main__":
     app.run(
         host=os.environ.get("HOST", "0.0.0.0"),

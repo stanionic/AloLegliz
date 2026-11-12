@@ -6,6 +6,12 @@
   <meta name="theme-color" content="#f7f4ed">
   <title>ALO LEGLIZ — Unis pour Haïti</title>
   <meta name="description" content="ALO LEGLIZ est une plateforme d’unité, de réveil spirituel et de salut pour Haïti, au service des Églises, missions, organisations et communautés.">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-icon" href="/icons/icon-192.svg">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="ALO LEGLIZ">
+  <meta name="msapplication-TileColor" content="#102b3f">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
@@ -81,6 +87,12 @@
     navLinks.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{navLinks.classList.remove('open');menuButton.setAttribute('aria-expanded','false');menuButton.textContent='☰'}));
     const answers=[[/événement|activité|rendez-vous/i,'Consultez l’espace Événements & formations pour découvrir les prochains rendez-vous.'],[/cours|formation|apprendre/i,'L’espace Événements & formations accueillera les cours en ligne et les activités d’apprentissage.'],[/église|mission|organisation|fédération|école|université|entreprise/i,'La rubrique « Explorer la plateforme » présente les espaces destinés aux Églises, missions, organisations, établissements et entreprises.'],[/histoire|tourisme|site/i,'La rubrique Histoire & patrimoine propose des repères sur Haïti et a vocation à présenter ses sites.'],[/actualité|nouvelle/i,'Les actualités et initiatives de la communauté seront regroupées dans l’espace À la une.'],[/balado|podcast|audio/i,'Découvrez la rubrique Balados & médias, notamment le contenu « Éduquer pour changer ».'],[/don|donation|soutenir/i,'Pour manifester votre intérêt ou soutenir le mouvement, utilisez les boutons de contact en bas de page.']];
     document.getElementById('chatForm').addEventListener('submit',event=>{event.preventDefault();const input=document.getElementById('chatInput'),question=input.value.trim();if(!question)return;const body=document.getElementById('chatBody');const user=document.createElement('div');user.className='chat-message';user.style.cssText='margin:0 0 12px auto;background:#dcebe5;border-radius:14px 4px 14px 14px';user.textContent=question;body.append(user);const response=document.createElement('div');response.className='chat-message';const found=answers.find(([pattern])=>pattern.test(question));response.textContent=found?found[1]:'Je peux vous orienter vers les rubriques de la plateforme : mouvement, histoire, actualités, événements, formations et balados.';body.append(response);input.value='';body.scrollTop=body.scrollHeight});
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js')
+        .then((reg) => console.log('Service Worker enregistré :', reg))
+        .catch((err) => console.log('Erreur Service Worker :', err));
+    }
   </script>
 </body>
 </html>
