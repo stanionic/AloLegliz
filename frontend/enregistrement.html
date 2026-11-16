@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f4ed">
+  <title>Enregistrement MEFOL — ALO LEGLIZ</title>
+  <meta name="description" content="Enregistrez votre Mission, Église, Fédération, Organisation ou Ligue sur la plateforme ALO LEGLIZ.">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-icon" href="/images/logo.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="ALO LEGLIZ">
+  <meta name="msapplication-TileColor" content="#102b3f">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--navy:#102b3f;--blue:#184b68;--teal:#267a72;--gold:#d6a84f;--paper:#f7f4ed;--white:#fff;--ink:#172d38;--muted:#62727a;--line:#e5e4dc;--serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',Arial,sans-serif}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.65}a{color:inherit;text-decoration:none}button{font:inherit}
+
+    /* ── LAYOUT ── */
+    .wrap{width:min(1160px,calc(100% - 48px));margin:auto}
+
+    /* ── TOPBAR ── */
+    .topbar{background:var(--navy);color:#edf2ed;font-size:.78rem;letter-spacing:.04em}.topbar .wrap{display:flex;justify-content:space-between;align-items:center;min-height:38px}.topbar b{color:#e5c177}
+
+    /* ── HEADER / NAV ── */
+    .site-header{position:sticky;top:0;z-index:20;background:rgba(247,244,237,.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(16,43,63,.08)}.nav{height:78px;display:flex;align-items:center;justify-content:space-between;gap:28px}
+    .brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:.07em;color:var(--navy)}.brand-mark{width:40px;height:40px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;border:2px solid var(--gold);padding:2px;box-sizing:border-box}.brand-mark img{width:100%;height:100%;object-fit:contain;display:block}
+    .nav-links{display:flex;align-items:center;gap:26px;font-size:.88rem;color:#42545c}.nav-links a:hover{color:var(--teal)}
+    .nav-cta,.button{display:inline-flex;justify-content:center;align-items:center;gap:9px;padding:12px 20px;border-radius:5px;background:var(--teal);color:white;font-weight:700;font-size:.9rem;transition:transform .2s,background .2s;border:none;cursor:pointer}.nav-cta:hover,.button:hover{transform:translateY(-2px);background:#1e625c}
+    .menu-toggle{display:none;border:0;background:transparent;color:var(--navy);font-size:1.5rem}
+    .button.gold{background:var(--gold);color:var(--navy)}.button.outline{background:transparent;color:var(--teal);border:1px solid var(--teal)}
+
+    /* ── HERO BANNER ── */
+    .hero-banner{background:var(--navy);color:white;padding:80px 0 60px;text-align:center;position:relative;overflow:hidden}
+    .hero-banner::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(16,43,63,.98),rgba(24,75,104,.85)),url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=2000&q=85') center/cover}
+    .hero-banner .content{position:relative;z-index:1}
+    .eyebrow{font-size:.73rem;text-transform:uppercase;letter-spacing:.18em;color:var(--teal);font-weight:700}
+    .hero-banner .eyebrow{color:#e9c477}
+    .hero-banner h1{font:600 clamp(2rem,5vw,3.5rem)/1.1 var(--serif);margin:18px 0 12px;letter-spacing:-.02em}
+    .hero-banner h1 em{color:#e7c278;font-weight:500}
+    .hero-banner p{max-width:600px;margin:0 auto;color:#c8d8d8;font-size:1.05rem}
+    .type-badges{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:24px}
+    .type-badges span{padding:8px 18px;border:1px solid rgba(214,168,79,.4);border-radius:999px;font-size:.82rem;color:#e9c477;letter-spacing:.05em;font-weight:600}
+
+    /* ── FORM SECTION ── */
+    .form-section{padding:70px 0 90px}
+    .form-card{max-width:780px;margin:0 auto;background:var(--white);border:1px solid var(--line);border-radius:16px;padding:48px 40px;box-shadow:0 12px 40px rgba(16,43,63,.06)}
+    .form-title{font:600 1.6rem var(--serif);color:var(--navy);margin:0 0 6px;text-align:center}
+    .form-subtitle{text-align:center;color:var(--muted);font-size:.92rem;margin:0 0 36px}
+
+    /* Group headers inside form */
+    .form-group{margin-top:32px;padding-top:24px;border-top:1px solid var(--line)}
+    .form-group:first-of-type{margin-top:0;padding-top:0;border-top:none}
+    .group-label{font:600 1.1rem var(--serif);color:var(--navy);margin:0 0 18px;display:flex;align-items:center;gap:10px}
+    .group-label .g-icon{width:32px;height:32px;border-radius:50%;background:#e8f1ed;display:grid;place-items:center;font-size:1rem;flex-shrink:0}
+
+    /* Form grid */
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+    .form-row.full{grid-template-columns:1fr}
+    .form-row.triple{grid-template-columns:1fr 1fr 1fr}
+
+    /* Fields */
+    .field{display:flex;flex-direction:column;gap:5px}
+    .field label{font-size:.8rem;font-weight:600;color:var(--navy)}
+    .field label .req{color:#c0392b;margin-left:2px}
+    .field input,.field select,.field textarea{
+      background:var(--paper);border:1px solid var(--line);border-radius:8px;
+      padding:12px 14px;color:var(--ink);font-family:var(--sans);font-size:.92rem;
+      outline:none;transition:border-color .2s,box-shadow .2s;width:100%
+    }
+    .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(38,122,114,.12)}
+    .field textarea{resize:vertical;min-height:90px}
+    .field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%2362727a' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;cursor:pointer}
+    .field .hint{font-size:.74rem;color:var(--muted);margin-top:2px}
+    .word-counter{font-size:.74rem;color:var(--muted);text-align:right;margin-top:2px}.word-counter.over{color:#c0392b;font-weight:600}
+
+    /* Person card (for 3 responsables) */
+    .person-card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:18px;margin-bottom:12px}
+    .person-card .person-title{font-size:.82rem;font-weight:700;color:var(--teal);margin-bottom:12px;letter-spacing:.04em}
+
+    /* Submit */
+    .form-submit{width:100%;margin-top:28px;padding:16px;font-size:1rem;border-radius:8px}
+    .form-note{text-align:center;font-size:.78rem;color:var(--muted);margin-top:14px;line-height:1.6}
+
+    /* Confirmation */
+    .confirm-msg{display:none;text-align:center;padding:40px 20px}
+    .confirm-msg .check{width:64px;height:64px;border-radius:50%;background:#e8f1ed;display:grid;place-items:center;font-size:1.8rem;margin:0 auto 20px}
+    .confirm-msg h3{font:600 1.5rem var(--serif);color:var(--navy);margin:0 0 10px}
+    .confirm-msg p{color:var(--muted);max-width:460px;margin:0 auto}
+
+    /* ── FOOTER ── */
+    .footer{background:#0b2232;color:#d5dfdc;padding:62px 0 28px}
+    .footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:50px}.footer .brand{color:white}.footer p{color:#afc0c1;max-width:330px;font-size:.9rem}.footer h4{color:#e5c177;margin:0 0 12px}.footer-links{display:grid;gap:8px;font-size:.88rem;color:#c0cecd}
+    .footer-bottom{margin-top:42px;padding-top:20px;border-top:1px solid rgba(255,255,255,.14);font-size:.8rem;color:#8fa4a6;display:flex;justify-content:space-between;gap:20px}
+
+    /* ── TOAST ── */
+    .toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:var(--navy);color:white;padding:12px 18px;border-radius:5px;transition:.25s;z-index:40}.toast.show{opacity:1;transform:translate(-50%,0)}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:850px){.nav-links{gap:14px;font-size:.8rem}.nav-cta{padding:10px 13px}.footer-grid{gap:28px}.form-row.triple{grid-template-columns:1fr}}
+    @media(max-width:650px){
+      .wrap{width:min(100% - 32px,1160px)}.topbar .wrap{justify-content:center}.topbar .top-note{display:none}
+      .nav{height:68px}.menu-toggle{display:block}.nav-cta{margin-left:auto}
+      .nav-links{display:none;position:absolute;top:68px;left:0;right:0;background:var(--paper);padding:18px 24px 24px;border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;font-size:.95rem}.nav-links.open{display:flex}
+      .hero-banner{padding:70px 0 50px}
+      .form-card{padding:28px 20px}.form-row{grid-template-columns:1fr}.form-row.triple{grid-template-columns:1fr}
+      .footer-grid{grid-template-columns:1fr;gap:28px}.footer-bottom{flex-direction:column}
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar"><div class="wrap"><span>Plateforme de foi, d'unité et de service pour Haïti</span><span class="top-note"><b>Yon Mouvman Inite &amp; Sali pou Ayiti</b></span></div></div>
+  <header class="site-header"><nav class="nav wrap" aria-label="Navigation principale">
+    <a class="brand" href="/" aria-label="ALO LEGLIZ, accueil"><img class="brand-mark" src="/images/logo.png" alt="ALO LEGLIZ logo" width="38" height="38"><span>ALO LEGLIZ</span></a>
+    <button class="menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+    <div class="nav-links" id="navLinks"><a href="/">Accueil</a><a href="/evenements.html">Événements</a><a href="/enregistrement.html" style="color:var(--gold);font-weight:700">📋 MEFOL</a></div>
+    <a class="nav-cta" href="#formulaire">S'enregistrer <span aria-hidden="true">↗</span></a>
+  </nav></header>
+
+  <!-- ================= HERO BANNER ================= -->
+  <section class="hero-banner">
+    <div class="content wrap">
+      <div class="eyebrow">Rejoindre le réseau</div>
+      <h1>Enregistrez votre <em>MEFOL</em></h1>
+      <p>Inscrivez votre Mission, Église, Fédération, Organisation ou Ligue sur la plateforme ALO LEGLIZ et rejoignez le mouvement d'unité pour Haïti.</p>
+      <div class="type-badges">
+        <span>✝️ Mission</span>
+        <span>⛪ Église</span>
+        <span>🤝 Fédération</span>
+        <span>🏢 Organisation</span>
+        <span>📋 Ligue</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FORM ================= -->
+  <section class="form-section" id="formulaire">
+    <div class="wrap">
+      <div class="form-card">
+        <h2 class="form-title">Formulaire d'enregistrement MEFOL</h2>
+        <p class="form-subtitle">Remplissez les informations ci-dessous pour inscrire votre organisation sur la plateforme.</p>
+
+        <form id="mefol-form" novalidate>
+
+          <!-- ── INFORMATIONS GÉNÉRALES ── -->
+          <div class="form-group">
+            <div class="group-label"><span class="g-icon">⛪</span> Informations générales</div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="type-mefol">Type de MEFOL <span class="req">*</span></label>
+                <select id="type-mefol" name="type_mefol" required>
+                  <option value="" disabled selected>— Sélectionner —</option>
+                  <option value="mission">Mission</option>
+                  <option value="eglise">Église</option>
+                  <option value="federation">Fédération</option>
+                  <option value="organisation">Organisation</option>
+                  <option value="ligue">Ligue</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="nom">Nom de l'Église / Organisation <span class="req">*</span></label>
+                <input type="text" id="nom" name="nom" placeholder="Ex : Église Baptiste de Pétion-Ville" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="date-creation">Date de création <span class="req">*</span></label>
+                <input type="date" id="date-creation" name="date_creation" required>
+              </div>
+              <div class="field">
+                <label for="effectif">Effectif (nombre de membres) <span class="req">*</span></label>
+                <select id="effectif" name="effectif" required>
+                  <option value="" disabled selected>— Sélectionner —</option>
+                  <option value="1-25">1 – 25 membres</option>
+                  <option value="26-50">26 – 50 membres</option>
+                  <option value="51-100">51 – 100 membres</option>
+                  <option value="101-250">101 – 250 membres</option>
+                  <option value="251-500">251 – 500 membres</option>
+                  <option value="501-1000">501 – 1 000 membres</option>
+                  <option value="1001-5000">1 001 – 5 000 membres</option>
+                  <option value="5001+">Plus de 5 000 membres</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── COORDONNÉES ── -->
+          <div class="form-group">
+            <div class="group-label"><span class="g-icon">📍</span> Coordonnées</div>
+
+            <div class="form-row full">
+              <div class="field">
+                <label for="adresse">Adresse complète <span class="req">*</span></label>
+                <input type="text" id="adresse" name="adresse" placeholder="Rue, quartier, ville, département" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="departement">Département <span class="req">*</span></label>
+                <select id="departement" name="departement" required>
+                  <option value="" disabled selected>— Sélectionner —</option>
+                  <option value="Ouest">Ouest</option>
+                  <option value="Artibonite">Artibonite</option>
+                  <option value="Nord">Nord</option>
+                  <option value="Nord-Est">Nord-Est</option>
+                  <option value="Nord-Ouest">Nord-Ouest</option>
+                  <option value="Centre">Centre</option>
+                  <option value="Sud">Sud</option>
+                  <option value="Sud-Est">Sud-Est</option>
+                  <option value="Grand'Anse">Grand'Anse</option>
+                  <option value="Nippes">Nippes</option>
+                  <option value="Diaspora">Diaspora</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="ville">Ville</label>
+                <input type="text" id="ville" name="ville" placeholder="Ex : Port-au-Prince">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="email">Email <span class="req">*</span></label>
+                <input type="email" id="email" name="email" placeholder="contact@eglise.ht" required>
+              </div>
+              <div class="field">
+                <label for="telephone">Téléphone <span class="req">*</span></label>
+                <input type="tel" id="telephone" name="telephone" placeholder="+509 0000 0000" required>
+              </div>
+            </div>
+
+            <div class="form-row full">
+              <div class="field">
+                <label for="registre-mdc">Nº de registre MDC</label>
+                <input type="text" id="registre-mdc" name="registre_mdc" placeholder="Numéro d'enregistrement au Ministère des Cultes">
+                <span class="hint">Laissez vide si non applicable.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── PERSONNES RESPONSABLES ── -->
+          <div class="form-group">
+            <div class="group-label"><span class="g-icon">👤</span> Personnes responsables <span style="font-weight:400;font-size:.82rem;color:var(--muted);font-family:var(--sans)">(3 personnes)</span></div>
+
+            <div class="person-card">
+              <div class="person-title">Responsable nº 1 (principal)</div>
+              <div class="form-row triple">
+                <div class="field">
+                  <label for="resp1-nom">Nom complet <span class="req">*</span></label>
+                  <input type="text" id="resp1-nom" name="resp1_nom" placeholder="Prénom et nom" required>
+                </div>
+                <div class="field">
+                  <label for="resp1-fonction">Fonction <span class="req">*</span></label>
+                  <select id="resp1-fonction" name="resp1_fonction" required>
+                    <option value="" disabled selected>— Fonction —</option>
+                    <option value="pasteur">Pasteur</option>
+                    <option value="apotre">Apôtre</option>
+                    <option value="eveque">Évêque</option>
+                    <option value="reverend">Révérend</option>
+                    <option value="missionnaire">Missionnaire</option>
+                    <option value="president">Président</option>
+                    <option value="directeur">Directeur / Directrice</option>
+                    <option value="coordinateur">Coordinateur / Coordinatrice</option>
+                    <option value="secretaire">Secrétaire général(e)</option>
+                    <option value="ancien">Ancien / Ancienne</option>
+                    <option value="diacre">Diacre / Diaconesse</option>
+                    <option value="autre">Autre</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="resp1-tel">Téléphone <span class="req">*</span></label>
+                  <input type="tel" id="resp1-tel" name="resp1_tel" placeholder="+509 0000 0000" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="person-card">
+              <div class="person-title">Responsable nº 2</div>
+              <div class="form-row triple">
+                <div class="field">
+                  <label for="resp2-nom">Nom complet <span class="req">*</span></label>
+                  <input type="text" id="resp2-nom" name="resp2_nom" placeholder="Prénom et nom" required>
+                </div>
+                <div class="field">
+                  <label for="resp2-fonction">Fonction <span class="req">*</span></label>
+                  <select id="resp2-fonction" name="resp2_fonction" required>
+                    <option value="" disabled selected>— Fonction —</option>
+                    <option value="pasteur">Pasteur</option>
+                    <option value="apotre">Apôtre</option>
+                    <option value="eveque">Évêque</option>
+                    <option value="reverend">Révérend</option>
+                    <option value="missionnaire">Missionnaire</option>
+                    <option value="president">Président</option>
+                    <option value="directeur">Directeur / Directrice</option>
+                    <option value="coordinateur">Coordinateur / Coordinatrice</option>
+                    <option value="secretaire">Secrétaire général(e)</option>
+                    <option value="ancien">Ancien / Ancienne</option>
+                    <option value="diacre">Diacre / Diaconesse</option>
+                    <option value="autre">Autre</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="resp2-tel">Téléphone</label>
+                  <input type="tel" id="resp2-tel" name="resp2_tel" placeholder="+509 0000 0000">
+                </div>
+              </div>
+            </div>
+
+            <div class="person-card">
+              <div class="person-title">Responsable nº 3</div>
+              <div class="form-row triple">
+                <div class="field">
+                  <label for="resp3-nom">Nom complet <span class="req">*</span></label>
+                  <input type="text" id="resp3-nom" name="resp3_nom" placeholder="Prénom et nom" required>
+                </div>
+                <div class="field">
+                  <label for="resp3-fonction">Fonction <span class="req">*</span></label>
+                  <select id="resp3-fonction" name="resp3_fonction" required>
+                    <option value="" disabled selected>— Fonction —</option>
+                    <option value="pasteur">Pasteur</option>
+                    <option value="apotre">Apôtre</option>
+                    <option value="eveque">Évêque</option>
+                    <option value="reverend">Révérend</option>
+                    <option value="missionnaire">Missionnaire</option>
+                    <option value="president">Président</option>
+                    <option value="directeur">Directeur / Directrice</option>
+                    <option value="coordinateur">Coordinateur / Coordinatrice</option>
+                    <option value="secretaire">Secrétaire général(e)</option>
+                    <option value="ancien">Ancien / Ancienne</option>
+                    <option value="diacre">Diacre / Diaconesse</option>
+                    <option value="autre">Autre</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="resp3-tel">Téléphone</label>
+                  <input type="tel" id="resp3-tel" name="resp3_tel" placeholder="+509 0000 0000">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── BASE DOCTRINALE ── -->
+          <div class="form-group">
+            <div class="group-label"><span class="g-icon">📖</span> Doctrine &amp; fondation</div>
+
+            <div class="form-row full">
+              <div class="field">
+                <label for="base-doctrinale">Base doctrinale <span class="req">*</span></label>
+                <textarea id="base-doctrinale" name="base_doctrinale" rows="4" maxlength="700" placeholder="Décrivez brièvement la base doctrinale de votre organisation (100 mots maximum)…" required></textarea>
+                <div class="word-counter" id="word-counter">0 / 100 mots</div>
+              </div>
+            </div>
+
+            <div class="form-row full">
+              <div class="field">
+                <label for="fondation">Fondation de l'Église <span class="req">*</span></label>
+                <select id="fondation" name="fondation" required>
+                  <option value="" disabled selected>— Type de fondation —</option>
+                  <option value="locale">Fondation locale (Haïti)</option>
+                  <option value="missionnaire">Fondation missionnaire (internationale)</option>
+                  <option value="denomination">Issue d'une dénomination</option>
+                  <option value="independante">Église indépendante</option>
+                  <option value="fusion">Fusion / regroupement</option>
+                  <option value="diaspora">Fondée dans la diaspora</option>
+                  <option value="autre">Autre</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row full">
+              <div class="field">
+                <label for="fondation-details">Précisions sur la fondation</label>
+                <textarea id="fondation-details" name="fondation_details" rows="3" placeholder="Fondateur(s), circonstances, dénomination d'origine…"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── PROGRAMME ANNUEL ── -->
+          <div class="form-group">
+            <div class="group-label"><span class="g-icon">📅</span> Programme annuel</div>
+
+            <div class="form-row full">
+              <div class="field">
+                <label for="programme-annuel">Programme annuel de l'Église <span class="req">*</span></label>
+                <textarea id="programme-annuel" name="programme_annuel" rows="5" placeholder="Décrivez les grandes lignes du programme annuel : conférences, retraites, formations, campagnes d'évangélisation, activités sociales…" required></textarea>
+                <span class="hint">Événements majeurs, périodes de jeûne, conférences, formations, etc.</span>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="button gold form-submit">📋 Enregistrer votre MEFOL</button>
+          <p class="form-note">Vos informations sont confidentielles et ne seront utilisées que dans le cadre de la plateforme ALO LEGLIZ.<br>Les champs marqués <span style="color:#c0392b">*</span> sont obligatoires.</p>
+        </form>
+
+        <div class="confirm-msg" id="confirmMsg">
+          <div class="check">✅</div>
+          <h3>Enregistrement reçu !</h3>
+          <p>Merci d'avoir inscrit votre organisation sur ALO LEGLIZ. L'équipe de coordination examinera votre demande et vous contactera prochainement.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer"><div class="wrap"><div class="footer-grid"><div><a class="brand" href="/"><img class="brand-mark" src="/images/logo.png" alt="ALO LEGLIZ logo" width="38" height="38"><span>ALO LEGLIZ</span></a><p>Un mouvement d'unité, de réveil spirituel et de salut pour Haïti. Créé le 22 décembre 2025.</p></div><div><h4>Découvrir</h4><div class="footer-links"><a href="/">Accueil</a><a href="/evenements.html">Événements</a><a href="/enregistrement.html">Enregistrement MEFOL</a></div></div><div><h4>Participer</h4><div class="footer-links"><a href="/evenements.html">Événements &amp; cours</a><a href="/">Actualités</a><a href="https://wa.me/50948592888" target="_blank" rel="noopener">Contact WhatsApp</a></div></div></div><div class="footer-bottom"><span>© 2026 ALO LEGLIZ · Tous droits réservés</span><span>Unis dans la foi, engagés pour Haïti.</span></div></div></footer>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script>
+    /* ── Mobile menu ── */
+    const menuButton = document.querySelector('.menu-toggle');
+    const navLinks = document.getElementById('navLinks');
+    menuButton.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      menuButton.setAttribute('aria-expanded', String(open));
+      menuButton.textContent = open ? '×' : '☰';
+    });
+    navLinks.querySelectorAll('a').forEach(link =>
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuButton.setAttribute('aria-expanded', 'false');
+        menuButton.textContent = '☰';
+      })
+    );
+
+    /* ── Word counter for base doctrinale ── */
+    const doctrineField = document.getElementById('base-doctrinale');
+    const wordCounter = document.getElementById('word-counter');
+    const MAX_WORDS = 100;
+
+    doctrineField.addEventListener('input', () => {
+      const text = doctrineField.value.trim();
+      const words = text ? text.split(/\s+/).length : 0;
+      wordCounter.textContent = `${words} / ${MAX_WORDS} mots`;
+      wordCounter.classList.toggle('over', words > MAX_WORDS);
+    });
+
+    /* ── Form submission ── */
+    const form = document.getElementById('mefol-form');
+    const confirmMsg = document.getElementById('confirmMsg');
+    const toast = document.getElementById('toast');
+
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      /* Check word count */
+      const docText = doctrineField.value.trim();
+      const words = docText ? docText.split(/\s+/).length : 0;
+      if (words > MAX_WORDS) {
+        showToast(`La base doctrinale dépasse ${MAX_WORDS} mots (${words} actuellement).`);
+        doctrineField.focus();
+        return;
+      }
+
+      /* Native validation */
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      /* Collect data */
+      const data = new FormData(form);
+      const entries = Object.fromEntries(data.entries());
+      console.log('MEFOL Registration:', entries);
+
+      /* Show confirmation */
+      form.style.display = 'none';
+      confirmMsg.style.display = 'block';
+      showToast('🙏 Enregistrement MEFOL reçu !');
+      window.scrollTo({ top: document.getElementById('formulaire').offsetTop - 100, behavior: 'smooth' });
+    });
+
+    /* ── Service Worker ── */
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js')
+        .then((reg) => console.log('Service Worker enregistré :', reg))
+        .catch((err) => console.log('Erreur Service Worker :', err));
+    }
+  </script>
+</body>
+</html>
