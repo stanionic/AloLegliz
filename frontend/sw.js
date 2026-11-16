@@ -1,9 +1,10 @@
-const CACHE_NAME = 'alolegliz-v2';
+const CACHE_NAME = 'alolegliz-v3';
 const ASSETS = [
   '/',
   '/manifest.json',
   '/evenements.html',
-  '/images/logo.png',
+  '/enregistrement.html',
+  '/images/Logo.jpeg',
   'https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap',
   'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=2000&q=85'
 ];

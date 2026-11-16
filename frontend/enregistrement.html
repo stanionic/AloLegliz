@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f7f4ed">
-  <title>Enregistrement MEFOL — ALO LEGLIZ</title>
-  <meta name="description" content="Enregistrez votre Mission, Église, Fédération, Organisation ou Ligue sur la plateforme ALO LEGLIZ.">
+  <title>Enregistrement FEMOL — ALO LEGLIZ</title>
+  <meta name="description" content="Enregistrez votre Fédération, Église, Mission ou Ligue sur la plateforme ALO LEGLIZ.">
   <link rel="manifest" href="/manifest.json">
-  <link rel="apple-touch-icon" href="/images/logo.png">
+  <link rel="apple-touch-icon" href="/images/Logo.jpeg">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="ALO LEGLIZ">
@@ -27,7 +27,7 @@
 
     /* ── HEADER / NAV ── */
     .site-header{position:sticky;top:0;z-index:20;background:rgba(247,244,237,.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(16,43,63,.08)}.nav{height:78px;display:flex;align-items:center;justify-content:space-between;gap:28px}
-    .brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:.07em;color:var(--navy)}.brand-mark{width:40px;height:40px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;border:2px solid var(--gold);padding:2px;box-sizing:border-box}.brand-mark img{width:100%;height:100%;object-fit:contain;display:block}
+    .brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:.07em;color:var(--navy)}.brand-mark{width:40px;height:40px;border-radius:50%;overflow:hidden;display:block;object-fit:contain;background:#fff;border:2px solid var(--gold);padding:2px;box-sizing:border-box}
     .nav-links{display:flex;align-items:center;gap:26px;font-size:.88rem;color:#42545c}.nav-links a:hover{color:var(--teal)}
     .nav-cta,.button{display:inline-flex;justify-content:center;align-items:center;gap:9px;padding:12px 20px;border-radius:5px;background:var(--teal);color:white;font-weight:700;font-size:.9rem;transition:transform .2s,background .2s;border:none;cursor:pointer}.nav-cta:hover,.button:hover{transform:translateY(-2px);background:#1e625c}
     .menu-toggle{display:none;border:0;background:transparent;color:var(--navy);font-size:1.5rem}
@@ -114,9 +114,9 @@
 <body>
   <div class="topbar"><div class="wrap"><span>Plateforme de foi, d'unité et de service pour Haïti</span><span class="top-note"><b>Yon Mouvman Inite &amp; Sali pou Ayiti</b></span></div></div>
   <header class="site-header"><nav class="nav wrap" aria-label="Navigation principale">
-    <a class="brand" href="/" aria-label="ALO LEGLIZ, accueil"><img class="brand-mark" src="/images/logo.png" alt="ALO LEGLIZ logo" width="38" height="38"><span>ALO LEGLIZ</span></a>
+    <a class="brand" href="/" aria-label="ALO LEGLIZ, accueil"><img class="brand-mark" src="/images/Logo.jpeg" alt="ALO LEGLIZ logo" width="38" height="38"><span>ALO LEGLIZ</span></a>
     <button class="menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
-    <div class="nav-links" id="navLinks"><a href="/">Accueil</a><a href="/evenements.html">Événements</a><a href="/enregistrement.html" style="color:var(--gold);font-weight:700">📋 MEFOL</a></div>
+    <div class="nav-links" id="navLinks"><a href="/">Accueil</a><a href="/evenements.html">Événements</a><a href="/enregistrement.html" style="color:var(--gold);font-weight:700">📋 FEMOL</a></div>
     <a class="nav-cta" href="#formulaire">S'enregistrer <span aria-hidden="true">↗</span></a>
   </nav></header>
 
@@ -124,13 +124,12 @@
   <section class="hero-banner">
     <div class="content wrap">
       <div class="eyebrow">Rejoindre le réseau</div>
-      <h1>Enregistrez votre <em>MEFOL</em></h1>
-      <p>Inscrivez votre Mission, Église, Fédération, Organisation ou Ligue sur la plateforme ALO LEGLIZ et rejoignez le mouvement d'unité pour Haïti.</p>
+      <h1>Enregistrez votre <em>FEMOL</em></h1>
+      <p>Inscrivez votre Fédération, Église, Mission ou Ligue sur la plateforme ALO LEGLIZ et rejoignez le mouvement d'unité pour Haïti.</p>
       <div class="type-badges">
-        <span>✝️ Mission</span>
-        <span>⛪ Église</span>
         <span>🤝 Fédération</span>
-        <span>🏢 Organisation</span>
+        <span>⛪ Église</span>
+        <span>✝️ Mission</span>
         <span>📋 Ligue</span>
       </div>
     </div>
@@ -140,10 +139,10 @@
   <section class="form-section" id="formulaire">
     <div class="wrap">
       <div class="form-card">
-        <h2 class="form-title">Formulaire d'enregistrement MEFOL</h2>
-        <p class="form-subtitle">Remplissez les informations ci-dessous pour inscrire votre organisation sur la plateforme.</p>
+        <h2 class="form-title">Formulaire d'enregistrement FEMOL</h2>
+        <p class="form-subtitle">Remplissez les informations ci-dessous pour inscrire votre Fédération, Église, Mission ou Ligue sur la plateforme.</p>
 
-        <form id="mefol-form" novalidate>
+        <form id="femol-form" novalidate>
 
           <!-- ── INFORMATIONS GÉNÉRALES ── -->
           <div class="form-group">
@@ -151,18 +150,17 @@
 
             <div class="form-row">
               <div class="field">
-                <label for="type-mefol">Type de MEFOL <span class="req">*</span></label>
-                <select id="type-mefol" name="type_mefol" required>
+                <label for="type-femol">Type de FEMOL <span class="req">*</span></label>
+                <select id="type-femol" name="type_femol" required>
                   <option value="" disabled selected>— Sélectionner —</option>
-                  <option value="mission">Mission</option>
-                  <option value="eglise">Église</option>
                   <option value="federation">Fédération</option>
-                  <option value="organisation">Organisation</option>
+                  <option value="eglise">Église</option>
+                  <option value="mission">Mission</option>
                   <option value="ligue">Ligue</option>
                 </select>
               </div>
               <div class="field">
-                <label for="nom">Nom de l'Église / Organisation <span class="req">*</span></label>
+                <label for="nom">Nom de la FEMOL (Fédération / Église / Mission / Ligue) <span class="req">*</span></label>
                 <input type="text" id="nom" name="nom" placeholder="Ex : Église Baptiste de Pétion-Ville" required>
               </div>
             </div>
@@ -394,21 +392,21 @@
             </div>
           </div>
 
-          <button type="submit" class="button gold form-submit">📋 Enregistrer votre MEFOL</button>
+          <button type="submit" class="button gold form-submit">📋 Enregistrer votre FEMOL</button>
           <p class="form-note">Vos informations sont confidentielles et ne seront utilisées que dans le cadre de la plateforme ALO LEGLIZ.<br>Les champs marqués <span style="color:#c0392b">*</span> sont obligatoires.</p>
         </form>
 
         <div class="confirm-msg" id="confirmMsg">
           <div class="check">✅</div>
           <h3>Enregistrement reçu !</h3>
-          <p>Merci d'avoir inscrit votre organisation sur ALO LEGLIZ. L'équipe de coordination examinera votre demande et vous contactera prochainement.</p>
+          <p>Merci d'avoir inscrit votre FEMOL sur ALO LEGLIZ. L'équipe de coordination examinera votre demande et vous contactera prochainement.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ================= FOOTER ================= -->
-  <footer class="footer"><div class="wrap"><div class="footer-grid"><div><a class="brand" href="/"><img class="brand-mark" src="/images/logo.png" alt="ALO LEGLIZ logo" width="38" height="38"><span>ALO LEGLIZ</span></a><p>Un mouvement d'unité, de réveil spirituel et de salut pour Haïti. Créé le 22 décembre 2025.</p></div><div><h4>Découvrir</h4><div class="footer-links"><a href="/">Accueil</a><a href="/evenements.html">Événements</a><a href="/enregistrement.html">Enregistrement MEFOL</a></div></div><div><h4>Participer</h4><div class="footer-links"><a href="/evenements.html">Événements &amp; cours</a><a href="/">Actualités</a><a href="https://wa.me/50948592888" target="_blank" rel="noopener">Contact WhatsApp</a></div></div></div><div class="footer-bottom"><span>© 2026 ALO LEGLIZ · Tous droits réservés</span><span>Unis dans la foi, engagés pour Haïti.</span></div></div></footer>
+  <footer class="footer"><div class="wrap"><div class="footer-grid"><div><a class="brand" href="/"><img class="brand-mark" src="/images/Logo.jpeg" alt="ALO LEGLIZ logo" width="38" height="38"><span>ALO LEGLIZ</span></a><p>Un mouvement d'unité, de réveil spirituel et de salut pour Haïti. Créé le 22 décembre 2025.</p></div><div><h4>Découvrir</h4><div class="footer-links"><a href="/">Accueil</a><a href="/evenements.html">Événements</a><a href="/enregistrement.html">Enregistrement FEMOL</a></div></div><div><h4>Participer</h4><div class="footer-links"><a href="/evenements.html">Événements &amp; cours</a><a href="/">Actualités</a><a href="https://wa.me/50948592888" target="_blank" rel="noopener">Contact WhatsApp</a></div></div></div><div class="footer-bottom"><span>© 2026 ALO LEGLIZ · Tous droits réservés</span><span>Unis dans la foi, engagés pour Haïti.</span></div></div></footer>
 
   <div class="toast" id="toast" role="status"></div>
 
@@ -442,7 +440,7 @@
     });
 
     /* ── Form submission ── */
-    const form = document.getElementById('mefol-form');
+    const form = document.getElementById('femol-form');
     const confirmMsg = document.getElementById('confirmMsg');
     const toast = document.getElementById('toast');
 
@@ -452,7 +450,7 @@
       setTimeout(() => toast.classList.remove('show'), 3000);
     }
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       /* Check word count */
@@ -471,15 +469,27 @@
       }
 
       /* Collect data */
-      const data = new FormData(form);
-      const entries = Object.fromEntries(data.entries());
-      console.log('MEFOL Registration:', entries);
+      const entries = Object.fromEntries(new FormData(form).entries());
+      const submitBtn = form.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
 
-      /* Show confirmation */
-      form.style.display = 'none';
-      confirmMsg.style.display = 'block';
-      showToast('🙏 Enregistrement MEFOL reçu !');
-      window.scrollTo({ top: document.getElementById('formulaire').offsetTop - 100, behavior: 'smooth' });
+      /* Enregistrer en base (SQLite via /api/femol) */
+      try {
+        const res = await fetch('/api/femol', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(entries)
+        });
+        const out = await res.json();
+        if (!out.ok) throw new Error(out.error || 'Erreur');
+        form.style.display = 'none';
+        confirmMsg.style.display = 'block';
+        showToast('🙏 Enregistrement FEMOL reçu !');
+        window.scrollTo({ top: document.getElementById('formulaire').offsetTop - 100, behavior: 'smooth' });
+      } catch (err) {
+        showToast('Le serveur ne répond pas. Réessayez plus tard.');
+        submitBtn.disabled = false;
+      }
     });
 
     /* ── Service Worker ── */
