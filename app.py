@@ -24,6 +24,11 @@ def service_worker():
     return send_from_directory(FRONTEND_DIR, "sw.js", mimetype="application/javascript")
 
 
+@app.get("/evenements.html")
+def evenements():
+    return send_from_directory(FRONTEND_DIR, "evenements.html")
+
+
 @app.get("/icons/<path:filename>")
 def icons(filename):
     return send_from_directory(FRONTEND_DIR / "icons", filename)

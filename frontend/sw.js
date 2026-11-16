@@ -1,13 +1,15 @@
-const CACHE_NAME = 'alolegliz-v1';
+const CACHE_NAME = 'alolegliz-v2';
 const ASSETS = [
   '/',
   '/manifest.json',
+  '/evenements.html',
   '/images/logo.png',
   'https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap',
   'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=2000&q=85'
 ];
 
 self.addEventListener('install', (event) => {
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
   );
@@ -28,6 +30,10 @@ self.addEventListener('fetch', (event) => {
           cache.put(event.request, responseToCache);
         });
         return response;
+      }).catch(() => {
+        if (event.request.mode === 'navigate') {
+          return caches.match('/');
+        }
       });
     })
   );
@@ -43,6 +49,6 @@ self.addEventListener('activate', (event) => {
           }
         })
       );
-    })
+    }).then(() => self.clients.claim())
   );
 });

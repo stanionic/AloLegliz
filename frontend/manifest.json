@@ -2,6 +2,7 @@
   "name": "ALO LEGLIZ — Unis pour Haïti",
   "short_name": "ALO LEGLIZ",
   "description": "Une plateforme d'unité, de réveil spirituel et de salut pour Haïti, au service des Églises, missions, organisations et communautés.",
+  "id": "/",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
@@ -24,5 +25,19 @@
     }
   ],
   "categories": ["lifestyle", "religion", "education"],
-  "shortcuts": []
+  "shortcuts": [
+    {
+      "name": "Événements",
+      "short_name": "Événements",
+      "description": "Voir les événements et formations",
+      "url": "/evenements.html",
+      "icons": [
+        {
+          "src": "/images/logo.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
 }
