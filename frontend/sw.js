@@ -1,4 +1,4 @@
-const CACHE_NAME = 'alolegliz-v11';
+const CACHE_NAME = 'alolegliz-v13';
 const ASSETS = [
   '/',
   '/manifest.json',

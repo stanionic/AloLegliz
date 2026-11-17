@@ -87,6 +87,15 @@
       .criterion{padding:18px;gap:14px}
       .footer-grid{grid-template-columns:1fr;gap:28px}.footer-bottom{flex-direction:column}
     }
+
+    /* ── CONTACTER LE CONCEPTEUR ── */
+    .contact-banner{width:min(1200px,calc(100% - 48px));margin:38px auto 30px;padding:22px 24px 22px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px;background:linear-gradient(110deg,#fffefa,#fff);border:1px solid #eadfbf;border-left:6px solid #d6ad35;border-radius:18px;box-shadow:0 8px 26px rgba(16,43,63,.08)}
+    .contact-banner p{margin:0;color:#253746;font-size:clamp(.92rem,1.5vw,1.2rem);line-height:1.5}
+    .contact-banner a{display:inline-flex;align-items:center;justify-content:center;gap:14px;flex:none;padding:17px 25px;border-radius:999px;background:#12336d;color:#fff;font-weight:700;font-size:.95rem;transition:transform .2s,background .2s}
+    .contact-banner a:hover{background:#0e2855;transform:translateY(-2px)}
+    .contact-banner a span{color:#9ee0bb;font-weight:600}
+    .contact-banner a:focus-visible{outline:3px solid #267a72;outline-offset:4px}
+    @media(max-width:650px){.contact-banner{width:calc(100% - 32px);margin:24px auto;padding:21px;align-items:stretch;flex-direction:column;gap:16px}.contact-banner a{align-self:flex-start;padding:14px 20px;font-size:.9rem}}
   </style>
 </head>
 <body>
@@ -252,6 +261,9 @@
 
   <!-- ================= FOOTER ================= -->
   <footer class="footer"><div class="wrap"><div class="footer-grid"><div><a class="brand" href="/"><img class="brand-mark" src="/images/Logo.jpeg" alt="ALO LEGLIZ logo" width="38" height="38"><span>ALO LEGLIZ</span></a><p>Un mouvement d'unité, de réveil spirituel et de salut pour Haïti. Créé le 22 décembre 2025.</p></div><div><h4>Découvrir</h4><div class="footer-links"><a href="/">Accueil</a><a href="/evenements.html">Événements</a><a href="/organigramme.html">Organigramme</a></div></div><div><h4>Participer</h4><div class="footer-links"><a href="/enregistrement.html">Enregistrement FEMOL</a><a href="/organigramme.html#adhesion">Devenir membre</a><a href="https://wa.me/50948592888" target="_blank" rel="noopener">Contact WhatsApp</a></div></div></div><div class="footer-bottom"><span>© 2026 ALO LEGLIZ · Tous droits réservés</span><span>Unis dans la foi, engagés pour Haïti.</span></div></div></footer>
+
+  <!-- ================= CONTACTER LE CONCEPTEUR ================= -->
+  <aside class="contact-banner" id="contact" aria-label="Contacter le concepteur"><p>Une question ou un projet ? Échangez directement avec le concepteur.</p><a href="https://wa.me/50948592888" target="_blank" rel="noopener noreferrer">Contacter le concepteur <span>WhatsApp ↗</span></a></aside>
 
   <script>
     /* ── Mobile menu ── */
