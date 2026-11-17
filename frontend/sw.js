@@ -1,9 +1,10 @@
-const CACHE_NAME = 'alolegliz-v5';
+const CACHE_NAME = 'alolegliz-v10';
 const ASSETS = [
   '/',
   '/manifest.json',
   '/evenements.html',
   '/enregistrement.html',
+  '/organigramme.html',
   '/images/Logo.jpeg',
   'https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap',
   'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=2000&q=85'
@@ -17,6 +18,15 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+  const url = new URL(event.request.url);
+
+  // Ne jamais mettre en cache l'espace admin ni l'API (données sensibles/dynamiques).
+  const isAdmin = url.pathname === '/admin' || url.pathname === '/admin.html';
+  const isApi = url.pathname.startsWith('/api/');
+  if (event.request.method !== 'GET' || (url.origin === self.location.origin && (isAdmin || isApi))) {
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request).then((response) => {
       if (response) {

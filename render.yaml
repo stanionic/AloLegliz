@@ -2,5 +2,19 @@ services:
   - type: web
     name: alo-legliz
     runtime: python
+    plan: starter
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn app:app --bind 0.0.0.0:$PORT
+    disk:
+      name: alo-legliz-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: DATA_DIR
+        value: /var/data
+      - key: SECRET_KEY
+        generateValue: true
+      - key: SESSION_COOKIE_SECURE
+        value: "true"
+      - key: ADMIN_PSEUDO
+        value: AdminAloLegliz

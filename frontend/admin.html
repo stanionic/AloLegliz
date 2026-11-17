@@ -1,0 +1,918 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#102b3f">
+  <title>Super Admin — ALO LEGLIZ</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="apple-touch-icon" href="/images/Logo.jpeg">
+  <link rel="icon" type="image/jpeg" href="/images/Logo.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --navy:#102b3f;--blue:#184b68;--teal:#267a72;--teal-dark:#1e625c;--gold:#d6a84f;
+      --paper:#f4f1ea;--white:#fff;--ink:#172d38;--muted:#62727a;--line:#e5e4dc;
+      --danger:#c0392b;--ok:#267a72;
+      --serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',Arial,sans-serif;
+      --shadow:0 12px 40px rgba(16,43,63,.10);--shadow-lg:0 24px 70px rgba(16,43,63,.20);
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:
+        radial-gradient(1200px 600px at 100% -10%,rgba(38,122,114,.10),transparent 60%),
+        radial-gradient(900px 500px at -10% 0%,rgba(214,168,79,.12),transparent 55%),
+        var(--paper);
+      color:var(--ink);font-family:var(--sans);line-height:1.6;min-height:100vh}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit;cursor:pointer}
+
+    /* ── LOGIN ── */
+    .login-view{min-height:100vh;display:grid;place-items:center;padding:24px}
+    .login-card{width:min(420px,100%);background:rgba(255,255,255,.86);backdrop-filter:blur(18px);
+      border:1px solid rgba(255,255,255,.7);border-radius:22px;padding:44px 38px;box-shadow:var(--shadow-lg);
+      animation:rise .5s cubic-bezier(.2,.8,.2,1)}
+    @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+    .login-brand{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;margin-bottom:26px}
+    .login-brand img{width:64px;height:64px;border-radius:50%;object-fit:contain;background:#fff;border:2px solid var(--gold);padding:3px}
+    .login-brand h1{font:600 1.5rem var(--serif);color:var(--navy);margin:0}
+    .login-brand p{margin:0;color:var(--muted);font-size:.86rem;letter-spacing:.06em;text-transform:uppercase}
+    .field{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+    .field label{font-size:.8rem;font-weight:600;color:var(--navy)}
+    .field input,.field select,.field textarea{background:var(--paper);border:1px solid var(--line);border-radius:10px;
+      padding:12px 14px;color:var(--ink);font-family:var(--sans);font-size:.94rem;outline:none;width:100%;
+      transition:border-color .2s,box-shadow .2s}
+    .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(38,122,114,.14)}
+    .field textarea{resize:vertical;min-height:84px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border:none;border-radius:10px;
+      font-weight:700;font-size:.9rem;background:var(--teal);color:#fff;transition:transform .18s,background .18s,box-shadow .18s}
+    .btn:hover{transform:translateY(-2px);background:var(--teal-dark);box-shadow:0 10px 26px rgba(38,122,114,.25)}
+    .btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+    .btn.gold{background:var(--gold);color:var(--navy)}
+    .btn.gold:hover{background:#c99a3c}
+    .btn.ghost{background:transparent;color:var(--navy);border:1px solid var(--line)}
+    .btn.ghost:hover{background:#fff;box-shadow:none}
+    .btn.danger{background:var(--danger)}
+    .btn.danger:hover{background:#a5301f}
+    .btn.block{width:100%}
+    .login-error{background:rgba(192,57,43,.08);border:1px solid rgba(192,57,43,.25);color:var(--danger);
+      padding:10px 14px;border-radius:10px;font-size:.84rem;margin-bottom:16px;display:none}
+    .login-error.show{display:block;animation:shake .35s}
+    @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+    /* ── APP ── */
+    .app-view{display:none}
+    .app-view.show{display:block}
+    .topbar{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.82);backdrop-filter:blur(16px);
+      border-bottom:1px solid var(--line)}
+    .topbar-inner{width:min(1240px,calc(100% - 40px));margin:auto;height:72px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .topbar .brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:.05em;color:var(--navy)}
+    .topbar .brand img{width:38px;height:38px;border-radius:50%;object-fit:contain;background:#fff;border:2px solid var(--gold);padding:2px}
+    .topbar .brand small{display:block;font-weight:600;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal)}
+    .topbar-right{display:flex;align-items:center;gap:14px}
+    .who{font-size:.84rem;color:var(--muted)}
+    .who b{color:var(--navy)}
+    .wrap{width:min(1240px,calc(100% - 40px));margin:auto;padding:34px 0 70px}
+
+    /* ── CARDS ── */
+    .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;margin-bottom:28px}
+    .stat{background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:var(--radius);padding:22px;
+      box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s}
+    .stat:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+    .stat .k{font-size:.74rem;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);font-weight:700}
+    .stat .v{font:600 2.1rem var(--serif);color:var(--navy);margin-top:8px;line-height:1}
+    .stat .v small{font-size:.85rem;font-family:var(--sans);color:var(--muted);font-weight:500;margin-left:6px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .chip{font-size:.76rem;padding:5px 12px;border-radius:999px;background:rgba(38,122,114,.10);color:var(--teal-dark);font-weight:600}
+    .chip.gold{background:rgba(214,168,79,.16);color:#8a6a1f}
+
+    /* ── PANEL ── */
+    .panel{background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:var(--radius);
+      box-shadow:var(--shadow);overflow:hidden}
+    .tabs{display:flex;gap:6px;padding:14px 18px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+    .tab{padding:12px 18px;border:none;background:transparent;font-weight:700;color:var(--muted);border-bottom:2px solid transparent;
+      margin-bottom:-1px;transition:color .2s,border-color .2s}
+    .tab:hover{color:var(--navy)}
+    .tab.active{color:var(--teal-dark);border-color:var(--teal)}
+    .panel-body{padding:22px}
+    .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin-bottom:18px}
+    .toolbar .field{margin:0}
+    .toolbar .grow{flex:1;min-width:180px}
+    .toolbar select,.toolbar input{padding:10px 12px}
+
+    /* ── TABLE ── */
+    .table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+    table{width:100%;border-collapse:collapse;font-size:.87rem;min-width:720px}
+    thead th{background:#f8f6f1;text-align:left;padding:12px 14px;font-size:.72rem;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line);white-space:nowrap}
+    tbody td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:middle}
+    tbody tr{transition:background .15s}
+    tbody tr:hover{background:#faf9f5}
+    tbody tr:last-child td{border-bottom:none}
+    .pill{display:inline-block;font-size:.72rem;font-weight:700;padding:3px 10px;border-radius:999px;background:rgba(38,122,114,.12);color:var(--teal-dark)}
+    .pill.draft{background:rgba(214,168,79,.18);color:#8a6a1f}
+    .row-actions{display:flex;gap:6px;flex-wrap:wrap}
+    .mini{padding:7px 12px;font-size:.78rem;border-radius:8px}
+    .empty{padding:44px 18px;text-align:center;color:var(--muted)}
+    .pager{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:16px;flex-wrap:wrap}
+    .pager .info{font-size:.82rem;color:var(--muted)}
+
+    /* ── MODAL ── */
+    .modal{position:fixed;inset:0;z-index:60;display:none;align-items:flex-start;justify-content:center;
+      background:rgba(16,43,63,.5);backdrop-filter:blur(4px);padding:32px 18px;overflow-y:auto}
+    .modal.show{display:flex}
+    .modal-card{width:min(760px,100%);background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow-lg);
+      animation:rise .35s cubic-bezier(.2,.8,.2,1);overflow:hidden}
+    .modal-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 24px;border-bottom:1px solid var(--line)}
+    .modal-head h3{font:600 1.25rem var(--serif);color:var(--navy);margin:0}
+    .modal-close{border:none;background:transparent;font-size:1.5rem;line-height:1;color:var(--muted)}
+    .modal-close:hover{color:var(--navy)}
+    .modal-body{padding:22px 24px;max-height:66vh;overflow-y:auto}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .form-grid .full{grid-column:1 / -1}
+    .modal-foot{display:flex;justify-content:flex-end;gap:10px;padding:16px 24px;border-top:1px solid var(--line);background:#faf9f5}
+    @media(max-width:640px){.form-grid{grid-template-columns:1fr}}
+
+    /* ── TOAST ── */
+    .toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,24px);opacity:0;pointer-events:none;
+      background:var(--navy);color:#fff;padding:13px 20px;border-radius:10px;font-size:.88rem;z-index:80;
+      box-shadow:var(--shadow-lg);transition:opacity .25s,transform .25s;max-width:90vw;text-align:center}
+    .toast.show{opacity:1;transform:translate(-50%,0)}
+    .toast.error{background:var(--danger)}
+    .toast.ok{background:var(--teal-dark)}
+
+    .skeleton{color:var(--muted);padding:30px;text-align:center}
+
+    /* ── CARROUSEL ── */
+    .car-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+    .car-card{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);
+      display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
+    .car-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+    .car-thumb{aspect-ratio:16/10;background:#f0ede6;display:grid;place-items:center;overflow:hidden}
+    .car-thumb img{width:100%;height:100%;object-fit:contain}
+    .car-meta{padding:12px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
+    .car-meta b{font-size:.9rem;color:var(--navy)}
+    .car-meta small{color:var(--muted);font-size:.74rem;word-break:break-all}
+    .car-actions{display:flex;gap:6px;flex-wrap:wrap;padding:0 14px 14px}
+    .car-off{opacity:.55}
+    .upload-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .upload-row input[type=file]{font-size:.84rem;max-width:240px}
+    @media(max-width:640px){
+      .topbar-inner{height:64px}.topbar .brand span{display:none}
+      .panel-body{padding:16px}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════ LOGIN ══════════ -->
+<div class="login-view" id="loginView">
+  <form class="login-card" id="loginForm" autocomplete="on">
+    <div class="login-brand">
+      <img src="/images/Logo.jpeg" alt="ALO LEGLIZ">
+      <h1>Super Admin</h1>
+      <p>ALO LEGLIZ — Aksè rezève</p>
+    </div>
+    <div class="login-error" id="loginError"></div>
+    <div class="field">
+      <label for="pseudo">Pseudonyme</label>
+      <input type="text" id="pseudo" name="pseudo" autocomplete="username" required>
+    </div>
+    <div class="field">
+      <label for="password">Mot de passe</label>
+      <input type="password" id="password" name="password" autocomplete="current-password" required>
+    </div>
+    <button type="submit" class="btn block" id="loginBtn">Se connecter</button>
+  </form>
+</div>
+
+<!-- ══════════ APP ══════════ -->
+<div class="app-view" id="appView">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <img src="/images/Logo.jpeg" alt="ALO LEGLIZ">
+        <span>ALO LEGLIZ<small>Super Admin</small></span>
+      </div>
+      <div class="topbar-right">
+        <span class="who">Konekte kòm <b id="whoPseudo">—</b></span>
+        <a class="btn ghost" href="/" target="_blank" rel="noopener">Wè sit la</a>
+        <button class="btn ghost" id="logoutBtn">Dekonekte</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="stats">
+      <div class="stat">
+        <div class="k">Total FEMOL</div>
+        <div class="v" id="statFemol">—</div>
+        <div class="chips" id="statTypes"></div>
+      </div>
+      <div class="stat">
+        <div class="k">Événements</div>
+        <div class="v" id="statEvents">—</div>
+        <div class="chips"><span class="chip gold">Jere envitasyon &amp; pwogram</span></div>
+      </div>
+      <div class="stat">
+        <div class="k">Répartition par département</div>
+        <div class="chips" id="statDepts" style="margin-top:14px"></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="tabs">
+        <button class="tab active" data-tab="femol">FEMOL</button>
+        <button class="tab" data-tab="events">Événements</button>
+        <button class="tab" data-tab="carousel">Carrousel</button>
+      </div>
+
+      <!-- ── FEMOL ── -->
+      <div class="panel-body" id="tab-femol">
+        <div class="toolbar">
+          <div class="field grow">
+            <label for="q">Recherche</label>
+            <input type="text" id="q" placeholder="Nom, ville, email, téléphone…">
+          </div>
+          <div class="field">
+            <label for="fType">Type</label>
+            <select id="fType">
+              <option value="">Tous</option>
+              <option value="eglise">Église</option>
+              <option value="mission">Mission</option>
+              <option value="ecole">École</option>
+              <option value="universite">Université</option>
+              <option value="entreprise">Entreprise</option>
+              <option value="ligue">Ligue de pasteur</option>
+              <option value="organisation">Organisation</option>
+              <option value="federation">Fédération</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="fDept">Département</label>
+            <select id="fDept">
+              <option value="">Tous</option>
+              <option>Ouest</option><option>Artibonite</option><option>Nord</option><option>Nord-Est</option>
+              <option>Nord-Ouest</option><option>Centre</option><option>Sud</option><option>Sud-Est</option>
+              <option>Grand'Anse</option><option>Nippes</option><option>Diaspora</option>
+            </select>
+          </div>
+          <button class="btn" id="searchBtn">Rechercher</button>
+          <button class="btn ghost" id="resetBtn">Réinitialiser</button>
+          <button class="btn gold" id="exportBtn">⬇ Export CSV</button>
+        </div>
+
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th><th>Nom</th><th>Type</th><th>Ville</th><th>Département</th>
+                <th>Téléphone</th><th>Créé</th><th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="femolBody">
+              <tr><td colspan="8" class="skeleton">Chajman…</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pager">
+          <span class="info" id="femolInfo">—</span>
+          <span>
+            <button class="btn ghost mini" id="prevBtn">‹ Précédent</button>
+            <button class="btn ghost mini" id="nextBtn">Suivant ›</button>
+          </span>
+        </div>
+      </div>
+
+      <!-- ── ÉVÉNEMENTS ── -->
+      <div class="panel-body" id="tab-events" style="display:none">
+        <div class="toolbar">
+          <button class="btn gold" id="newEventBtn">＋ Nouvel événement</button>
+          <span class="info" id="eventsInfo" style="align-self:center;color:var(--muted);font-size:.82rem"></span>
+        </div>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr><th>#</th><th>Titre</th><th>Type</th><th>Début</th><th>Lieu</th><th>Statut</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="eventsBody">
+              <tr><td colspan="7" class="skeleton">Chajman…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── CARROUSEL ── -->
+      <div class="panel-body" id="tab-carousel" style="display:none">
+        <div class="toolbar">
+          <button class="btn gold" id="newCarouselBtn">＋ Ajouter une image</button>
+          <div class="upload-row">
+            <input type="file" id="carouselUpload" accept="image/*">
+            <button class="btn" id="carouselUploadBtn">⬆ Téléverser</button>
+          </div>
+          <span class="info" id="carouselInfo" style="align-self:center;color:var(--muted);font-size:.82rem"></span>
+        </div>
+        <div class="car-grid" id="carouselGrid"><div class="skeleton">Chajman…</div></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- ══════════ MODAL FEMOL ══════════ -->
+<div class="modal" id="femolModal">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3 id="femolModalTitle">Ficha FEMOL</h3>
+      <button class="modal-close" data-close="femolModal">✕</button>
+    </div>
+    <div class="modal-body"><form id="femolForm"><div class="form-grid" id="femolFields"></div></form></div>
+    <div class="modal-foot">
+      <button class="btn ghost" data-close="femolModal">Anile</button>
+      <button class="btn" id="femolSaveBtn">Sove chanjman yo</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ MODAL ÉVÉNEMENT ══════════ -->
+<div class="modal" id="eventModal">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3 id="eventModalTitle">Nouvel événement</h3>
+      <button class="modal-close" data-close="eventModal">✕</button>
+    </div>
+    <div class="modal-body"><form id="eventForm"><div class="form-grid" id="eventFields"></div></form></div>
+    <div class="modal-foot">
+      <button class="btn ghost" data-close="eventModal">Anile</button>
+      <button class="btn" id="eventSaveBtn">Sove</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+
+<!-- ══════════ MODAL CARROUSEL ══════════ -->
+<div class="modal" id="carouselModal">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3 id="carouselModalTitle">Nouvelle image</h3>
+      <button class="modal-close" data-close="carouselModal">✕</button>
+    </div>
+    <div class="modal-body"><form id="carouselForm"><div class="form-grid" id="carouselFields"></div></form></div>
+    <div class="modal-foot">
+      <button class="btn ghost" data-close="carouselModal">Anile</button>
+      <button class="btn" id="carouselSaveBtn">Sove</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ═══════════ Helpers ═══════════ */
+const toastEl = document.getElementById('toast');
+let toastTimer;
+function toast(msg, kind) {
+  toastEl.textContent = msg;
+  toastEl.className = 'toast show' + (kind ? ' ' + kind : '');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toastEl.classList.remove('show'), 3200);
+}
+async function api(path, options) {
+  const res = await fetch(path, Object.assign({ headers: { 'Content-Type': 'application/json' } }, options || {}));
+  if (res.status === 401) { showLogin(); throw new Error('unauth'); }
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok || data.ok === false) throw new Error(data.error || 'Erreur sèvè.');
+  return data;
+}
+function esc(value) {
+  if (value === null || value === undefined) return '';
+  return String(value).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+}
+const TYPE_LABELS = { eglise:'Église', mission:'Mission', ecole:'École', universite:'Université', entreprise:'Entreprise', ligue:'Ligue de pasteur', organisation:'Organisation', federation:'Fédération' };
+const EVENT_TYPE_LABELS = { conference:'Conférence', jeune:'Jeûne', formation:'Formation', campagne:'Campagne', retraite:'Retraite', autre:'Autre' };
+
+/* ═══════════ Schémas de formulaires ═══════════ */
+const FEMOL_SCHEMA = [
+  { name:'type_femol', label:'Type de FEMOL', type:'select', options:[['eglise','Église'],['mission','Mission'],['ecole','École'],['universite','Université'],['entreprise','Entreprise'],['ligue','Ligue de pasteur'],['organisation','Organisation'],['federation','Fédération']] },
+  { name:'nom', label:'Nom de la FEMOL' },
+  { name:'date_creation', label:'Date de Fondation', type:'date' },
+  { name:'effectif', label:'Effectif' },
+  { name:'adresse', label:'Adresse', full:true },
+  { name:'departement', label:'Département' },
+  { name:'ville', label:'Ville' },
+  { name:'email', label:'Email', type:'email' },
+  { name:'telephone', label:'Téléphone' },
+  { name:'registre_mdc', label:'Nº registre MDC' },
+  { name:'resp1_nom', label:'Resp. 1 — Nom' },
+  { name:'resp1_fonction', label:'Resp. 1 — Fonction' },
+  { name:'resp1_tel', label:'Resp. 1 — Téléphone' },
+  { name:'resp2_nom', label:'Resp. 2 — Nom' },
+  { name:'resp2_fonction', label:'Resp. 2 — Fonction' },
+  { name:'resp2_tel', label:'Resp. 2 — Téléphone' },
+  { name:'resp3_nom', label:'Resp. 3 — Nom' },
+  { name:'resp3_fonction', label:'Resp. 3 — Fonction' },
+  { name:'resp3_tel', label:'Resp. 3 — Téléphone' },
+  { name:'base_doctrinale', label:'Base doctrinale', type:'textarea', full:true },
+  { name:'fondation', label:'Fondation' },
+  { name:'fondation_details', label:'Précisions sur la fondation', type:'textarea', full:true },
+  { name:'programme_annuel', label:'Programme annuel', type:'textarea', full:true },
+  { name:'pasteur_photo', label:'Photo du pasteur (URL)', full:true },
+  { name:'pasteur_biographie', label:'Biographie du pasteur en chef', type:'textarea', full:true }
+];
+
+const EVENT_SCHEMA = [
+  { name:'titre', label:'Titre', full:true },
+  { name:'type', label:'Type', type:'select', options:[['','—'],['conference','Conférence'],['jeune','Jeûne'],['formation','Formation'],['campagne','Campagne'],['retraite','Retraite'],['autre','Autre']] },
+  { name:'statut', label:'Statut', type:'select', options:[['publie','Publié'],['brouillon','Brouillon']] },
+  { name:'date_debut', label:'Début', type:'datetime-local' },
+  { name:'date_fin', label:'Fin', type:'datetime-local' },
+  { name:'lieu', label:'Lieu' },
+  { name:'contact', label:'Contact' },
+  { name:'image_url', label:'Image (URL)', full:true },
+  { name:'description', label:'Description', type:'textarea', full:true }
+];
+
+function buildFields(container, schema, data) {
+  container.innerHTML = '';
+  schema.forEach(field => {
+    const wrap = document.createElement('div');
+    wrap.className = 'field' + (field.full ? ' full' : '');
+    const id = 'f-' + field.name;
+    let control;
+    if (field.type === 'textarea') {
+      control = document.createElement('textarea');
+      control.rows = 3;
+    } else if (field.type === 'select') {
+      control = document.createElement('select');
+      field.options.forEach(([value, label]) => {
+        const opt = document.createElement('option');
+        opt.value = value; opt.textContent = label;
+        control.appendChild(opt);
+      });
+    } else {
+      control = document.createElement('input');
+      control.type = field.type || 'text';
+    }
+    control.id = id;
+    control.name = field.name;
+    let value = data && data[field.name] !== null && data[field.name] !== undefined ? data[field.name] : '';
+    if (field.type === 'datetime-local' && value) value = String(value).slice(0, 16).replace(' ', 'T');
+    control.value = value;
+    const label = document.createElement('label');
+    label.htmlFor = id;
+    label.textContent = field.label;
+    wrap.appendChild(label);
+    wrap.appendChild(control);
+    container.appendChild(wrap);
+  });
+}
+
+function collectFields(container, schema) {
+  const out = {};
+  schema.forEach(field => {
+    const el = container.querySelector('#f-' + field.name);
+    if (el) out[field.name] = el.value.trim();
+  });
+  return out;
+}
+
+/* ═══════════ Auth ═══════════ */
+const loginView = document.getElementById('loginView');
+const appView = document.getElementById('appView');
+const loginError = document.getElementById('loginError');
+
+function showLogin() {
+  appView.classList.remove('show');
+  loginView.style.display = 'grid';
+}
+function showApp(pseudo) {
+  document.getElementById('whoPseudo').textContent = pseudo || 'Admin';
+  loginView.style.display = 'none';
+  appView.classList.add('show');
+}
+
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById('loginBtn');
+  btn.disabled = true;
+  loginError.classList.remove('show');
+  try {
+    const res = await fetch('/api/admin/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        pseudo: document.getElementById('pseudo').value,
+        password: document.getElementById('password').value
+      })
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || !data.ok) throw new Error(data.error || 'Koneksyon echwe.');
+    document.getElementById('password').value = '';
+    showApp(data.pseudo);
+    loadAll();
+  } catch (err) {
+    loginError.textContent = err.message;
+    loginError.classList.add('show');
+  } finally {
+    btn.disabled = false;
+  }
+});
+
+document.getElementById('logoutBtn').addEventListener('click', async () => {
+  await fetch('/api/admin/logout', { method: 'POST' }).catch(() => {});
+  showLogin();
+  toast('Ou dekonekte.', 'ok');
+});
+
+/* ═══════════ Tabs ═══════════ */
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const target = tab.dataset.tab;
+    document.getElementById('tab-femol').style.display = target === 'femol' ? 'block' : 'none';
+    document.getElementById('tab-events').style.display = target === 'events' ? 'block' : 'none';
+    document.getElementById('tab-carousel').style.display = target === 'carousel' ? 'block' : 'none';
+    if (target === 'carousel') loadCarousel();
+  });
+});
+
+/* ═══════════ Stats ═══════════ */
+async function loadStats() {
+  try {
+    const data = await api('/api/admin/stats');
+    document.getElementById('statFemol').textContent = data.total_femol;
+    document.getElementById('statEvents').textContent = data.total_events;
+    document.getElementById('statTypes').innerHTML = data.by_type.map(t =>
+      `<span class="chip">${esc(TYPE_LABELS[t.type_femol] || t.type_femol)} · ${t.c}</span>`).join('') ||
+      '<span class="chip">Pa gen done</span>';
+    document.getElementById('statDepts').innerHTML = data.by_departement.slice(0, 8).map(d =>
+      `<span class="chip gold">${esc(d.departement)} · ${d.c}</span>`).join('') ||
+      '<span class="chip gold">Pa gen done</span>';
+  } catch (err) { if (err.message !== 'unauth') toast(err.message, 'error'); }
+}
+
+/* ═══════════ FEMOL ═══════════ */
+let femolPage = 1;
+async function loadFemol(page) {
+  femolPage = page || femolPage;
+  const params = new URLSearchParams({
+    page: femolPage,
+    per_page: 25,
+    q: document.getElementById('q').value.trim(),
+    type: document.getElementById('fType').value,
+    departement: document.getElementById('fDept').value
+  });
+  const body = document.getElementById('femolBody');
+  body.innerHTML = '<tr><td colspan="8" class="skeleton">Chajman…</td></tr>';
+  try {
+    const data = await api('/api/admin/femol?' + params.toString());
+    if (!data.items.length) {
+      body.innerHTML = '<tr><td colspan="8" class="empty">Pa gen okenn enskripsyon FEMOL.</td></tr>';
+    } else {
+      body.innerHTML = data.items.map(item => `
+        <tr>
+          <td>${item.id}</td>
+          <td><b>${esc(item.nom)}</b></td>
+          <td><span class="pill">${esc(TYPE_LABELS[item.type_femol] || item.type_femol)}</span></td>
+          <td>${esc(item.ville)}</td>
+          <td>${esc(item.departement)}</td>
+          <td>${esc(item.telephone)}</td>
+          <td>${esc((item.created_at || '').slice(0, 16))}</td>
+          <td class="row-actions">
+            <button class="btn mini" data-view="${item.id}">Ouvrir</button>
+            <button class="btn danger mini" data-del="${item.id}" data-nom="${esc(item.nom)}">Efase</button>
+          </td>
+        </tr>`).join('');
+    }
+    const from = data.total ? (data.page - 1) * data.per_page + 1 : 0;
+    const to = Math.min(data.page * data.per_page, data.total);
+    document.getElementById('femolInfo').textContent = `${from}–${to} sou ${data.total}`;
+    document.getElementById('prevBtn').disabled = data.page <= 1;
+    document.getElementById('nextBtn').disabled = to >= data.total;
+  } catch (err) {
+    if (err.message !== 'unauth') body.innerHTML = `<tr><td colspan="8" class="empty">${esc(err.message)}</td></tr>`;
+  }
+}
+
+document.getElementById('femolBody').addEventListener('click', (e) => {
+  const viewBtn = e.target.closest('[data-view]');
+  const delBtn = e.target.closest('[data-del]');
+  if (viewBtn) openFemol(Number(viewBtn.dataset.view));
+  if (delBtn) removeFemol(Number(delBtn.dataset.del), delBtn.dataset.nom);
+});
+
+document.getElementById('searchBtn').addEventListener('click', () => loadFemol(1));
+document.getElementById('q').addEventListener('keydown', e => { if (e.key === 'Enter') loadFemol(1); });
+document.getElementById('resetBtn').addEventListener('click', () => {
+  document.getElementById('q').value = '';
+  document.getElementById('fType').value = '';
+  document.getElementById('fDept').value = '';
+  loadFemol(1);
+});
+document.getElementById('prevBtn').addEventListener('click', () => loadFemol(femolPage - 1));
+document.getElementById('nextBtn').addEventListener('click', () => loadFemol(femolPage + 1));
+document.getElementById('exportBtn').addEventListener('click', () => { window.location.href = '/api/admin/femol/export.csv'; });
+
+/* ── Modal FEMOL ── */
+const femolModal = document.getElementById('femolModal');
+const femolFields = document.getElementById('femolFields');
+let currentFemolId = null;
+
+async function openFemol(id) {
+  try {
+    const data = await api('/api/admin/femol/' + id);
+    currentFemolId = id;
+    document.getElementById('femolModalTitle').textContent = 'Ficha FEMOL #' + id;
+    buildFields(femolFields, FEMOL_SCHEMA, data.item);
+    femolModal.classList.add('show');
+  } catch (err) { toast(err.message, 'error'); }
+}
+
+document.getElementById('femolSaveBtn').addEventListener('click', async () => {
+  if (!currentFemolId) return;
+  const payload = collectFields(femolFields, FEMOL_SCHEMA);
+  const btn = document.getElementById('femolSaveBtn');
+  btn.disabled = true;
+  try {
+    await api('/api/admin/femol/' + currentFemolId, { method: 'PUT', body: JSON.stringify(payload) });
+    femolModal.classList.remove('show');
+    toast('Chanjman yo anrejistre.', 'ok');
+    loadFemol();
+    loadStats();
+  } catch (err) {
+    if (err.message !== 'unauth') toast(err.message, 'error');
+  } finally { btn.disabled = false; }
+});
+
+async function removeFemol(id, nom) {
+  if (!confirm(`Efase "${nom}" (#${id}) ? Aksyon sa a pa ka defèt.`)) return;
+  try {
+    await api('/api/admin/femol/' + id, { method: 'DELETE' });
+    toast('Enskripsyon efase.', 'ok');
+    loadFemol();
+    loadStats();
+  } catch (err) { if (err.message !== 'unauth') toast(err.message, 'error'); }
+}
+
+/* ═══════════ ÉVÉNEMENTS ═══════════ */
+async function loadEvents() {
+  const body = document.getElementById('eventsBody');
+  body.innerHTML = '<tr><td colspan="7" class="skeleton">Chajman…</td></tr>';
+  try {
+    const data = await api('/api/admin/events');
+    if (!data.items.length) {
+      body.innerHTML = '<tr><td colspan="7" class="empty">Pa gen okenn evènman. Kreye premye a.</td></tr>';
+    } else {
+      body.innerHTML = data.items.map(ev => `
+        <tr>
+          <td>${ev.id}</td>
+          <td><b>${esc(ev.titre)}</b></td>
+          <td>${esc(EVENT_TYPE_LABELS[ev.type] || ev.type || '')}</td>
+          <td>${esc((ev.date_debut || '').replace('T', ' ').slice(0, 16))}</td>
+          <td>${esc(ev.lieu)}</td>
+          <td><span class="pill ${ev.statut === 'brouillon' ? 'draft' : ''}">${ev.statut === 'brouillon' ? 'Brouillon' : 'Publié'}</span></td>
+          <td class="row-actions">
+            <button class="btn mini" data-evedit="${ev.id}">Modifier</button>
+            <button class="btn danger mini" data-evdel="${ev.id}" data-titre="${esc(ev.titre)}">Efase</button>
+          </td>
+        </tr>`).join('');
+    }
+    document.getElementById('eventsInfo').textContent = `${data.items.length} évènement(s)`;
+  } catch (err) {
+    if (err.message !== 'unauth') body.innerHTML = `<tr><td colspan="7" class="empty">${esc(err.message)}</td></tr>`;
+  }
+}
+
+document.getElementById('eventsBody').addEventListener('click', (e) => {
+  const editBtn = e.target.closest('[data-evedit]');
+  const delBtn = e.target.closest('[data-evdel]');
+  if (editBtn) openEvent(Number(editBtn.dataset.evedit));
+  if (delBtn) removeEvent(Number(delBtn.dataset.evdel), delBtn.dataset.titre);
+});
+
+const eventModal = document.getElementById('eventModal');
+const eventFields = document.getElementById('eventFields');
+let currentEventId = null;
+
+let eventsCache = [];
+async function openEvent(id) {
+  let item = { statut: 'publie' };
+  if (id) {
+    try {
+      if (!eventsCache.length) eventsCache = (await api('/api/admin/events')).items;
+      item = eventsCache.find(e => e.id === id) || item;
+    } catch (err) { return toast(err.message, 'error'); }
+  }
+  currentEventId = id || null;
+  document.getElementById('eventModalTitle').textContent = id ? 'Modifier l\'événement #' + id : 'Nouvel événement';
+  buildFields(eventFields, EVENT_SCHEMA, item);
+  eventModal.classList.add('show');
+}
+
+document.getElementById('newEventBtn').addEventListener('click', () => openEvent(null));
+
+document.getElementById('eventSaveBtn').addEventListener('click', async () => {
+  const payload = collectFields(eventFields, EVENT_SCHEMA);
+  if (!payload.titre) return toast('Tit evènman an obligatwa.', 'error');
+  const btn = document.getElementById('eventSaveBtn');
+  btn.disabled = true;
+  try {
+    if (currentEventId) {
+      await api('/api/admin/events/' + currentEventId, { method: 'PUT', body: JSON.stringify(payload) });
+      toast('Evènman aktyalize.', 'ok');
+    } else {
+      await api('/api/admin/events', { method: 'POST', body: JSON.stringify(payload) });
+      toast('Evènman kreye.', 'ok');
+    }
+    eventsCache = [];
+    eventModal.classList.remove('show');
+    loadEvents();
+    loadStats();
+  } catch (err) {
+    if (err.message !== 'unauth') toast(err.message, 'error');
+  } finally { btn.disabled = false; }
+});
+
+async function removeEvent(id, titre) {
+  if (!confirm(`Efase evènman "${titre}" (#${id}) ?`)) return;
+  try {
+    await api('/api/admin/events/' + id, { method: 'DELETE' });
+    eventsCache = [];
+    toast('Evènman efase.', 'ok');
+    loadEvents();
+    loadStats();
+  } catch (err) { if (err.message !== 'unauth') toast(err.message, 'error'); }
+}
+
+/* ═══════════ CARROUSEL ═══════════ */
+let carouselCache = [];
+async function loadCarousel() {
+  const grid = document.getElementById('carouselGrid');
+  grid.innerHTML = '<div class="skeleton">Chajman…</div>';
+  try {
+    const data = await api('/api/admin/carousel');
+    carouselCache = data.items;
+    if (!data.items.length) {
+      grid.innerHTML = '<div class="empty">Pa gen okenn imaj nan kawosèl la.</div>';
+    } else {
+      grid.innerHTML = data.items.map((item, i) => `
+        <div class="car-card ${item.actif ? '' : 'car-off'}">
+          <div class="car-thumb"><img src="${esc(item.image_url)}" alt="${esc(item.titre || '')}" loading="lazy"></div>
+          <div class="car-meta">
+            <b>${esc(item.titre || '(san tit)')}</b>
+            <small>${esc(item.image_url)}</small>
+            <span class="pill ${item.actif ? '' : 'draft'}">${item.actif ? 'Aktif' : 'Inaktif'}</span>
+          </div>
+          <div class="car-actions">
+            <button class="btn ghost mini" data-cup="${item.id}" ${i === 0 ? 'disabled' : ''} aria-label="Monter">↑</button>
+            <button class="btn ghost mini" data-cdown="${item.id}" ${i === data.items.length - 1 ? 'disabled' : ''} aria-label="Descendre">↓</button>
+            <button class="btn mini" data-cedit="${item.id}">Modifier</button>
+            <button class="btn danger mini" data-cdel="${item.id}" data-titre="${esc(item.titre || '')}">Efase</button>
+          </div>
+        </div>`).join('');
+    }
+    document.getElementById('carouselInfo').textContent = `${data.items.length} imaj`;
+  } catch (err) {
+    if (err.message !== 'unauth') grid.innerHTML = `<div class="empty">${esc(err.message)}</div>`;
+  }
+}
+
+document.getElementById('carouselGrid').addEventListener('click', (e) => {
+  const up = e.target.closest('[data-cup]');
+  const down = e.target.closest('[data-cdown]');
+  const edit = e.target.closest('[data-cedit]');
+  const del = e.target.closest('[data-cdel]');
+  if (up) moveCarousel(Number(up.dataset.cup), -1);
+  if (down) moveCarousel(Number(down.dataset.cdown), 1);
+  if (edit) openCarousel(Number(edit.dataset.cedit));
+  if (del) removeCarousel(Number(del.dataset.cdel), del.dataset.titre);
+});
+
+async function moveCarousel(id, delta) {
+  const ids = carouselCache.map(c => c.id);
+  const pos = ids.indexOf(id);
+  const target = pos + delta;
+  if (pos < 0 || target < 0 || target >= ids.length) return;
+  [ids[pos], ids[target]] = [ids[target], ids[pos]];
+  try {
+    await api('/api/admin/carousel/reorder', { method: 'POST', body: JSON.stringify({ order: ids }) });
+    loadCarousel();
+  } catch (err) { if (err.message !== 'unauth') toast(err.message, 'error'); }
+}
+
+const carouselModal = document.getElementById('carouselModal');
+const carouselFields = document.getElementById('carouselFields');
+let currentCarouselId = null;
+
+async function openCarousel(id) {
+  let item = { actif: 1 };
+  if (id) item = carouselCache.find(c => c.id === id) || item;
+  let options;
+  try {
+    const data = await api('/api/admin/carousel/available');
+    options = data.images.map(img => [img.image_url, img.name]);
+  } catch (err) { return toast(err.message, 'error'); }
+  if (item.image_url && !options.some(o => o[0] === item.image_url)) {
+    options.unshift([item.image_url, item.image_url]);
+  }
+  const schema = [
+    { name: 'image_url', label: 'Image', type: 'select', options, full: true },
+    { name: 'titre', label: 'Titre', full: true },
+    { name: 'description', label: 'Description', type: 'textarea', full: true },
+    { name: 'actif', label: 'Statut', type: 'select', options: [['1', 'Aktif'], ['0', 'Inaktif']] }
+  ];
+  currentCarouselId = id || null;
+  document.getElementById('carouselModalTitle').textContent = id ? 'Modifier l\'image #' + id : 'Nouvelle image';
+  buildFields(carouselFields, schema, {
+    image_url: item.image_url,
+    titre: item.titre,
+    description: item.description,
+    actif: String(item.actif ?? 1)
+  });
+  carouselModal.classList.add('show');
+}
+
+document.getElementById('newCarouselBtn').addEventListener('click', () => openCarousel(null));
+
+document.getElementById('carouselSaveBtn').addEventListener('click', async () => {
+  const payload = {
+    image_url: (carouselFields.querySelector('#f-image_url') || {}).value || '',
+    titre: (carouselFields.querySelector('#f-titre') || {}).value.trim(),
+    description: (carouselFields.querySelector('#f-description') || {}).value.trim(),
+    actif: (carouselFields.querySelector('#f-actif') || {}).value === '1'
+  };
+  if (!payload.image_url) return toast('Imaj la obligatwa.', 'error');
+  const btn = document.getElementById('carouselSaveBtn');
+  btn.disabled = true;
+  try {
+    if (currentCarouselId) {
+      await api('/api/admin/carousel/' + currentCarouselId, { method: 'PUT', body: JSON.stringify(payload) });
+      toast('Imaj aktyalize.', 'ok');
+    } else {
+      await api('/api/admin/carousel', { method: 'POST', body: JSON.stringify(payload) });
+      toast('Imaj ajoute.', 'ok');
+    }
+    carouselModal.classList.remove('show');
+    loadCarousel();
+  } catch (err) {
+    if (err.message !== 'unauth') toast(err.message, 'error');
+  } finally { btn.disabled = false; }
+});
+
+async function removeCarousel(id, titre) {
+  if (!confirm(`Efase imaj "${titre || '#' + id}" la ?`)) return;
+  try {
+    await api('/api/admin/carousel/' + id, { method: 'DELETE' });
+    toast('Imaj efase.', 'ok');
+    loadCarousel();
+  } catch (err) { if (err.message !== 'unauth') toast(err.message, 'error'); }
+}
+
+document.getElementById('carouselUploadBtn').addEventListener('click', async () => {
+  const input = document.getElementById('carouselUpload');
+  const file = input.files && input.files[0];
+  if (!file) return toast('Chwazi yon fichye imaj.', 'error');
+  const btn = document.getElementById('carouselUploadBtn');
+  btn.disabled = true;
+  const form = new FormData();
+  form.append('file', file);
+  try {
+    const res = await fetch('/api/admin/carousel/upload', { method: 'POST', body: form });
+    if (res.status === 401) { showLogin(); throw new Error('unauth'); }
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || data.ok === false) throw new Error(data.error || 'Erè telechajman.');
+    await api('/api/admin/carousel', { method: 'POST', body: JSON.stringify({ image_url: data.image_url, actif: true }) });
+    input.value = '';
+    toast('Imaj telechaje epi ajoute nan kawosèl la.', 'ok');
+    loadCarousel();
+  } catch (err) {
+    if (err.message !== 'unauth') toast(err.message, 'error');
+  } finally { btn.disabled = false; }
+});
+
+/* ═══════════ Modals close ═══════════ */
+document.querySelectorAll('[data-close]').forEach(btn => {
+  btn.addEventListener('click', () => document.getElementById(btn.dataset.close).classList.remove('show'));
+});
+document.querySelectorAll('.modal').forEach(modal => {
+  modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('show'); });
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') document.querySelectorAll('.modal.show').forEach(m => m.classList.remove('show'));
+});
+
+/* ═══════════ Init ═══════════ */
+function loadAll() { loadStats(); loadFemol(1); loadEvents(); loadCarousel(); }
+
+(async function init() {
+  try {
+    const res = await fetch('/api/admin/me');
+    const data = await res.json();
+    if (data.authenticated) { showApp(data.pseudo); loadAll(); }
+    else showLogin();
+  } catch (e) { showLogin(); }
+})();
+</script>
+</body>
+</html>
